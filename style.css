@@ -1,4 +1,3 @@
-
 body {
     background-color: black;
     color: green;
@@ -32,4 +31,45 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+img.mailbox {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+    height: auto;
+}
+
+.comment-section {
+    margin-top: 30px;
+}
+
+.comment-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.comment-section input[type="text"], .comment-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid green;
+    background-color: black;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.comment-section input[type="submit"] {
+    padding: 10px 20px;
+    border: 1px solid green;
+    background-color: black;
+    color: green;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.comment-section input[type="submit"]:hover {
+    background-color: green;
+    color: black;
 }
