@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = htmlspecialchars($_POST['comment']);
 
     // Your email address
-    $to = "your-email@example.com";
+    $to = "pedejesus3702@outlook.com";
 
     // Subject of the email
     $subject = "New Comment from Your Website";
