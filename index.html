@@ -35,12 +35,12 @@ related inquiries with timely resolutions.</p>
 
 <div class="comment-section">
     <h2>Leave a Comment</h2>
-    <form>
+    <form action="send_comment.php" method="post">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" required>
 
         <label for="comment">Comment:</label>
-        <textarea id="comment" name="comment" rows="4"></textarea>
+        <textarea id="comment" name="comment" rows="4" required></textarea>
 
         <input type="submit" value="Submit">
     </form>
