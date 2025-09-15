@@ -1,53 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introducing myself to the world</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wonderful Cats</title>
+  <meta name="description" content="A delightful one‑page website celebrating how wonderful cats are." />
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --panel: #111318;
+      --text: #e8ecf1;
+      --muted: #aeb8c4;
+      --brand: #ffb703; /* warm gold */
+      --accent: #8ecae6; /* soft blue */
+      --ring: rgba(255, 183, 3, 0.6);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    :root.light {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --brand: #d97706;
+      --accent: #2563eb;
+      --ring: rgba(37, 99, 235, .25);
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+    }
+    html, body { height: 100%; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(142,202,230,.15), transparent 60%),
+                  radial-gradient(900px 600px at 10% -10%, rgba(217,119,6,.12), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+      outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 8px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    header.site {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    }
+    .nav { display: flex; align-items: center; gap: 20px; padding: 14px 0; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: .3px; }
+    .brand .logo { width: 28px; height: 28px; border-radius: 8px; background:
+      radial-gradient(circle at 65% 35%, #fff6 0 28%, transparent 30%),
+      radial-gradient(circle at 70% 70%, #0003 0 22%, transparent 24%),
+      conic-gradient(from 220deg at 30% 40%, #ffb703, #fb8500 40%, #ffd166 80%, #ffb703);
+      box-shadow: inset 0 2px 6px #0004;
+    }
+    .navlinks { margin-left: auto; display: flex; gap: 16px; flex-wrap: wrap; }
+    .navlinks a { padding: 6px 10px; border-radius: 10px; }
+    .navlinks a:hover { background: color-mix(in srgb, var(--text) 10%, transparent); }
+    .toggle { margin-left: 12px; border: 1px solid color-mix(in srgb, var(--text) 15%, transparent); background: var(--panel); color: var(--text); padding: 6px 10px; border-radius: 10px; cursor: pointer; box-shadow: var(--shadow); }
+
+    .hero { padding: 80px 0 40px; text-align: center; }
+    .eyebrow { color: var(--muted); text-transform: uppercase; font-weight: 700; letter-spacing: .18em; font-size: .8rem; }
+    h1 { font-size: clamp(2rem, 3.8vw + 1rem, 3.8rem); line-height: 1.14; margin: 12px 0 14px; }
+    .lead { max-width: 780px; margin: 0 auto; font-size: 1.125rem; color: var(--muted); }
+    .cta { margin-top: 24px; display: inline-flex; align-items:center; gap:10px; padding: 12px 18px; border-radius: 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 85%, var(--panel)), var(--brand)); color: #1f1300; font-weight: 800; border: none; box-shadow: var(--shadow); cursor: pointer; }
+
+    .section { padding: 64px 0; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-top: 24px; }
+    .card { background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 8px 0; font-size: 1.15rem; }
+    .icon { width: 48px; height: 48px; display:grid; place-items:center; border-radius: 12px; background: color-mix(in srgb, var(--accent) 18%, var(--panel)); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    figure { background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 16px; overflow:hidden; margin: 0; box-shadow: var(--shadow); }
+    .catcard { aspect-ratio: 3/2; display:grid; place-items:center; font-size: 64px; }
+    figcaption { padding: 12px 14px; color: var(--muted); font-size: .95rem; }
+
+    details.faq { background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius: 16px; padding: 12px 14px; box-shadow: var(--shadow); }
+    details.faq + details.faq { margin-top: 10px; }
+    details.faq summary { list-style: none; cursor: pointer; font-weight: 700; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    .faq p { color: var(--muted); margin: 8px 0 0; }
+
+    .newsletter { display: grid; gap: 12px; max-width: 520px; }
+    .input { width: 100%; padding: 12px 14px; background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 12%, transparent); color: var(--text); border-radius: 12px; }
+    .btn { padding: 12px 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, var(--panel)), var(--accent)); color: #071424; box-shadow: var(--shadow); }
+
+    footer { padding: 34px 0 60px; color: var(--muted); text-align: center; }
+
+    /* decorative paw divider */
+    .paws { height: 48px; mask: radial-gradient(14px 10px at 6% 48%, #000 98%, transparent),
+                                radial-gradient(14px 10px at 16% 48%, #000 98%, transparent),
+                                radial-gradient(14px 10px at 26% 48%, #000 98%, transparent),
+                                radial-gradient(14px 10px at 36% 48%, #000 98%, transparent),
+                                linear-gradient(#000,#000);
+            -webkit-mask-composite: source-over; mask-composite: add; background: color-mix(in srgb, var(--text) 10%, transparent); margin: 34px 0; border-radius: 12px; }
+
+    .skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip:focus { position: fixed; left: 16px; top: 16px; width: auto; height: auto; padding: 10px 14px; background: var(--panel); color: var(--text); border-radius: 10px; z-index: 999; box-shadow: var(--shadow); }
+  </style>
 </head>
 <body>
-<p>This page is being hosted by Github, free to host, domain is owned by the creator of this page. Thanks. :) </p>
-<h1>Summary:</h1>
-<p>Self-learner & passionate about tech, on a path to become more successful in the tech industry by always being able to learn from past experiences.</p>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <div class="brand" aria-label="Wonderful Cats home">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Wonderful Cats</span>
+      </div>
+      <nav class="navlinks" aria-label="Sections">
+        <a href="#why">Why Cats</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#facts">Fun Facts</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button id="themeToggle" class="toggle" aria-pressed="false" aria-label="Toggle color theme">🌙 Theme</button>
+    </div>
+  </header>
 
-<h2>Certifications:</h2>
-<ul>
-  <li>Fortinet Fortigate 7.4 Operator</li>
-  <li>Computer Hardware Fundamentals</li>
-  <li>Technical Support Fundamentals</li>
-  <li>Career Essentials in System Administration by Microsoft and LinkedIn</li>
-  <li>Networking Basics</li>
-</ul>
+  <main id="main">
+    <section class="hero container" aria-labelledby="h1">
+      <div class="eyebrow">Feline appreciation society</div>
+      <h1 id="h1">Cats are quietly spectacular 🐾</h1>
+      <p class="lead">From soothing purrs to acrobatic leaps, cats blend grace, curiosity, and comedic timing like no other companion. This page is a cozy homage to their whiskered wonder.</p>
+      <button class="cta" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})" aria-label="Learn why cats are wonderful">
+        Start Exploring →
+      </button>
+    </section>
 
-<h2>Responsibilities as of now:</h2>
-<p>Service Desk Technician:</p>
-<p>As a Service Desk Technician at an Insurance Company from Puerto Rico, our primary
-responsibilities include providing technical support and troubleshooting
-for hardware and software issues, installing, configuring, and maintaining
-computer systems and peripherals, in collaboration with team members to
-manage user accounts and permissions, monitoring system performance,
-assisting with the implementation of new software updates, while maintaining
-documentation of IT systems tickets and procedures, and responding to IT-
-related inquiries with timely resolutions.</p>
+    <div class="paws container" aria-hidden="true"></div>
 
-<img src="mailbox.png" alt="Mailbox" class="mailbox">
-<!-- modify this form HTML and place wherever you want your form -->
-<form
-  action="https://formspree.io/f/xpzvgdeb"
-  method="POST"
->
-  <label>
-    Place your e-mail here:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message or comment here:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">SEND</button>
-</form>
+    <section id="why" class="section container" aria-labelledby="why-title">
+      <h2 id="why-title">Why cats are wonderful</h2>
+      <div class="cards" role="list">
+        <article class="card" role="listitem">
+          <div class="icon" aria-hidden="true">😺</div>
+          <h3>Personality in pint‑size</h3>
+          <p>Every cat is a mood board—playful, contemplative, mischievous, regal. Their individuality makes the friendship feel personal and earned.</p>
+        </article>
+        <article class="card" role="listitem">
+          <div class="icon" aria-hidden="true">🎭</div>
+          <h3>Comedy timing</h3>
+          <p>From mid‑air zoomies to dramatic flops, cats perform slapstick without trying. Even the loaf pose deserves a standing ovation.</p>
+        </article>
+        <article class="card" role="listitem">
+          <div class="icon" aria-hidden="true">💤</div>
+          <h3>The purr effect</h3>
+          <p>Purring is soothing, and many people find it lowers stress. It’s the original white‑noise machine—battery included.</p>
+        </article>
+        <article class="card" role="listitem">
+          <div class="icon" aria-hidden="true">🧭</div>
+          <h3>Graceful explorers</h3>
+          <p>Whiskers, night vision, and gymnast balance make every shelf an adventure. They’re tiny parkour experts with velvet paws.</p>
+        </article>
+      </div>
+    </section>
 
+    <section id="gallery" class="section container" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">Little gallery of whiskers</h2>
+      <div class="gallery">
+        <!-- Simple decorative cards using emoji; replace with real images later if you want. -->
+        <figure>
+          <div class="catcard" role="img" aria-label="Orange tabby smiling">😸</div>
+          <figcaption>Smiley tabby after a sunbeam nap.</figcaption>
+        </figure>
+        <figure>
+          <div class="catcard" role="img" aria-label="Cool cat with sunglasses">😎</div>
+          <figcaption>Cool cat energy: windowsill, 3pm.</figcaption>
+        </figure>
+        <figure>
+          <div class="catcard" role="img" aria-label="Cat sleeping">😴</div>
+          <figcaption>20 hours of sleep? Ambitious, but achievable.</figcaption>
+        </figure>
+        <figure>
+          <div class="catcard" role="img" aria-label="Cat with heart eyes">😻</div>
+          <figcaption>Affection level: biscuit‑making kneads.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="facts" class="section container" aria-labelledby="facts-title">
+      <h2 id="facts-title">Fun facts & gentle myths</h2>
+      <p class="lead">Tap for a random tidbit, or open the FAQs below for quick answers.</p>
+      <div class="cards" style="margin-top:18px">
+        <article class="card">
+          <h3 id="factText" aria-live="polite">Cats have a unique nose print—no two are the same.</h3>
+          <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap">
+            <button class="btn" id="factBtn" aria-describedby="factText">New fact 🐱</button>
+            <button class="btn" id="copyBtn">Copy fact</button>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Mini care checklist</h3>
+          <ul>
+            <li>Fresh water and balanced food</li>
+            <li>Cozy, safe resting spots</li>
+            <li>Playtime + enrichment (wands, puzzles)</li>
+            <li>Routine vet visits & vaccines</li>
+            <li>Respect their space and signals</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq" class="section container" aria-labelledby="faq-title">
+      <h2 id="faq-title">FAQ</h2>
+      <details class="faq">
+        <summary>Do cats really always land on their feet?</summary>
+        <p>They have a "righting reflex" that helps, but heights and surfaces matter. Keep windows secured and provide safe climbing options.</p>
+      </details>
+      <details class="faq">
+        <summary>Are cats aloof?</summary>
+        <p>Many are affectionate once they trust you. Cats communicate subtly—slow blinks, tail language, head bumps.</p>
+      </details>
+      <details class="faq">
+        <summary>Indoor or outdoor?</summary>
+        <p>Indoor lives are typically safer and longer. Consider leashed adventures or a secure catio for enrichment.</p>
+      </details>
+    </section>
+
+    <section class="section container" aria-labelledby="newsletter-title">
+      <h2 id="newsletter-title">Get a monthly mewsletter</h2>
+      <p class="lead">No spam—just cozy stories, care tips, and the occasional loaf appreciation post.</p>
+      <form class="newsletter" onsubmit="event.preventDefault(); alert('Thanks! Your mewsletter subscription is noted (demo).');">
+        <label for="email" class="visually-hidden">Email</label>
+        <input id="email" class="input" type="email" placeholder="you@catmail.com" required />
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+    </section>
+
+    <footer>
+      <div class="container">
+        Made with 🐾 and appreciation. <span aria-hidden="true">·</span> <a href="#top">Back to top</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Theme toggle with localStorage
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') root.classList.add('light');
+    const toggle = document.getElementById('themeToggle');
+    function syncBtn(){ toggle.setAttribute('aria-pressed', root.classList.contains('light') ? 'true' : 'false'); toggle.textContent = root.classList.contains('light') ? '🌞 Theme' : '🌙 Theme'; }
+    syncBtn();
+    toggle.addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+      syncBtn();
+    });
+
+    // Random facts
+    const facts = [
+      'Cats have a unique nose print—no two are the same.',
+      'A group of kittens is called a kindle; adult cats, a clowder.',
+      'Purring can occur when cats are happy, healing, or asking nicely.',
+      'Cats can rotate their ears about 180 degrees.',
+      'Whiskers help gauge space and air currents—please don’t trim them.',
+      'Many cats are lactose intolerant—water is always best.',
+      'The “slow blink” is a feline way to say “I feel safe with you.”',
+      'Cats walk with both right feet then both left—like camels and giraffes.',
+      'Most cats have five front toes and four on each back paw.',
+      'Kneading (“making biscuits”) is a leftover kitten comfort behavior.'
+    ];
+    const factText = document.getElementById('factText');
+    document.getElementById('factBtn').addEventListener('click', () => {
+      const next = facts[Math.floor(Math.random() * facts.length)];
+      factText.textContent = next;
+    });
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(factText.textContent); toggleFlash('Copied!'); }
+      catch { toggleFlash('Copy not supported'); }
+    });
+
+    // Simple flash message using the CTA button shadow
+    function toggleFlash(msg){
+      const b = document.createElement('div');
+      b.textContent = msg; b.setAttribute('role','status');
+      Object.assign(b.style, { position:'fixed', bottom:'24px', left:'50%', transform:'translateX(-50%)', background:'var(--panel)', color:'var(--text)', padding:'10px 14px', borderRadius:'10px', border:'1px solid color-mix(in srgb, var(--text) 12%, transparent)', boxShadow:'var(--shadow)', zIndex:'9999' });
+      document.body.appendChild(b);
+      setTimeout(()=> b.remove(), 1300);
+    }
+  </script>
 </body>
 </html>
