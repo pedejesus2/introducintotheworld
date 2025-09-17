@@ -210,6 +210,8 @@
       "A mother cat is a “queen”; an intact adult male is a “tom.”",
       "Puzzle feeders and wand-toy play help reduce boredom and unwanted behaviors."
     ];
+    // Merge without duplicates
+facts.push(...extraFacts.filter(f => !facts.includes(f)));
     const factText = document.getElementById('factText');
     document.getElementById('factBtn').addEventListener('click', () => {
       const next = facts[Math.floor(Math.random() * facts.length)];
